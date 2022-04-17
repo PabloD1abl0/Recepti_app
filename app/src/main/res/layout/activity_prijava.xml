@@ -56,6 +56,17 @@
         android:textAlignment="center" />
 
     <EditText
+        android:id="@+id/tb_mail_register"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:background="@null"
+        android:ems="10"
+        android:hint="Uporabniško ime"
+        android:inputType="textEmailAddress" />
+
+    <EditText
         android:id="@+id/tb_password"
         android:layout_width="350dp"
         android:layout_height="40dp"
