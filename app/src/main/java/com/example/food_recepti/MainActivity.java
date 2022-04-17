@@ -82,21 +82,6 @@ public class MainActivity extends AppCompatActivity {
                     if (!response.isSuccessful())
                         tb_password.setText(response.body().string());
                         isSus[0] = false;
-                    //tb_mail.setText("users.get(0).email");
-                    //Gson gson = new Gson();
-
-                    //tb_name.setText(response.body().string());
-                    /*List<User> users = new ArrayList<User>();
-                    JSONArray arr = new JSONArray(response.body().string());
-                    int count = 1;
-                    int index = 0;
-                    for (int i = 0; i < arr.length(); i++) {
-                        users.add(gson.fromJson(arr.get(i).toString(),User.class));
-                    }
-                    tb_username.setText(users.get(0).username);
-                    tb_password.setText(users.get(0).password);
-                    tb_mail.setText(users.get(0).email);*/
-
                 }
             }
         });

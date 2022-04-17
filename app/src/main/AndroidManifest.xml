@@ -13,10 +13,6 @@
         android:theme="@style/Theme.Food_recepti">
 
         <activity
-            android:name=".test"
-            android:exported="false"
-            android:label="@string/title_activity_test" />
-        <activity
             android:name=".ProfileActivity"
             android:exported="false" />
         <activity
