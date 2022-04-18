@@ -121,6 +121,9 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("password",user.getPassword());
         intent.putExtra("email",user.getEmail());
         startActivity(intent);
+        user = null;
+        tb_password.setText("");
+        tb_username.setText("");
 
         }
 
