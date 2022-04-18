@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -36,20 +38,21 @@ public class PrijavaActivity extends AppCompatActivity {
 
     EditText tb_name, tb_username, tb_mail, tb_password, tb_repeatPassword;
     Button btn_Register;
+    ImageButton btn_ShowPass, btn_ShowRepPass;
     private final OkHttpClient httpClient = new OkHttpClient();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prijava);
+
         tb_name = (EditText)findViewById(R.id.tb_name);
         tb_username = (EditText)findViewById(R.id.tb_username);
         tb_repeatPassword = (EditText)findViewById(R.id.tb_repeat_password);
         tb_password = (EditText)findViewById(R.id.tb_password);
-        tb_repeatPassword = (EditText)findViewById(R.id.tb_repeat_password);
-        btn_Register = (Button)findViewById(R.id.btn_register);
-        tb_mail = (EditText)findViewById(R.id.tb_mail_register);
+        btn_ShowPass = (ImageButton)findViewById(R.id.btn_showPass);
+        btn_ShowRepPass = (ImageButton)findViewById(R.id.btn_ShowRepPass);
+        btn_Register = (Button) findViewById(R.id.btn_register);
         btn_Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,7 +60,7 @@ public class PrijavaActivity extends AppCompatActivity {
                     PrijavaActivity view1 = new PrijavaActivity();
                     view1.sendPOST();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(),"Uporabnik že v aplikaciji!", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -71,7 +74,7 @@ public class PrijavaActivity extends AppCompatActivity {
                 if(txt.length() < 6)
                     tb_password.setTextColor(Color.RED);
                 else
-                    tb_password.setTextColor((Color.WHITE));
+                    tb_password.setTextColor((Color.BLACK));
             }
 
             @Override
@@ -88,14 +91,35 @@ public class PrijavaActivity extends AppCompatActivity {
                 if(!txt.equals(tb_password.getText().toString()))
                     tb_repeatPassword.setTextColor(Color.RED);
                 else
-                    tb_repeatPassword.setTextColor((Color.WHITE));
+                    tb_repeatPassword.setTextColor((Color.BLACK));
             }
 
             @Override
             public void afterTextChanged(Editable editable) {}
         });
-    }
 
+        btn_ShowPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if((InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD) == tb_password.getInputType())
+                    tb_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
+                else
+                    tb_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                tb_password.setSelection(tb_password.getText().length());
+            }
+        });
+
+        btn_ShowRepPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if((InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD) == tb_repeatPassword.getInputType())
+                    tb_repeatPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
+                else
+                    tb_repeatPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                tb_repeatPassword.setSelection(tb_repeatPassword.getText().length());
+            }
+        });
+    }
 
     private void sendPOST() throws IOException {
 
@@ -122,32 +146,13 @@ public class PrijavaActivity extends AppCompatActivity {
                 try (ResponseBody responseBody = response.body()) {
                     if (!response.isSuccessful())
                         isSus[0] = false;
-                    //tb_mail.setText("users.get(0).email");
-                    //Gson gson = new Gson();
-
-                    //tb_name.setText(response.body().string());
-                    /*List<User> users = new ArrayList<User>();
-                    JSONArray arr = new JSONArray(response.body().string());
-                    int count = 1;
-                    int index = 0;
-                    for (int i = 0; i < arr.length(); i++) {
-                        users.add(gson.fromJson(arr.get(i).toString(),User.class));
-                    }
-                    tb_username.setText(users.get(0).username);
-                    tb_password.setText(users.get(0).password);
-                    tb_mail.setText(users.get(0).email);*/
-
                 }
             }
         });
-        if(isSus[0]){
+
+        if(isSus[0])
             Toast.makeText(getApplicationContext(),"Uporabnik že v aplikaciji!", Toast.LENGTH_LONG).show();
-        }
-        else{
+        else
             Toast.makeText(getApplicationContext(),"Uspešna registracija!", Toast.LENGTH_LONG).show();
-
-        }
-
-
     }
 }

@@ -1,15 +1,26 @@
 package com.example.food_recepti;
 
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
-
+import com.example.food_recepti.User;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaDrm;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.method.PasswordTransformationMethod;
+import android.text.method.TransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -25,14 +36,19 @@ public class MainActivity extends AppCompatActivity {
 
     EditText tb_username, tb_password;
     Button btn_login;
+    ImageButton btn_showPass;
     private final OkHttpClient httpClient = new OkHttpClient();
+    private User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        btn_showPass = (ImageButton)findViewById(R.id.btn_showPassword);
         tb_username = (EditText) findViewById(R.id.tb_username_main);
         tb_password = (EditText) findViewById(R.id.tb_password_main);
+        tb_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         btn_login = (Button) findViewById(R.id.btn_login);
 
 
@@ -42,8 +58,18 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     sendPOST();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(),"Prijava neuspešna!", Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+        btn_showPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if((InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD) == tb_password.getInputType())
+                    tb_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
+                else
+                    tb_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                tb_password.setSelection(tb_password.getText().length());
             }
         });
     }
@@ -68,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 .url("https://spv-projekt.herokuapp.com/users/login")
                 .post(formBody)
                 .build();
-        final boolean[] isSus = {true};
+        final boolean[] isOver = {false};
 
         httpClient.newCall(request).enqueue(new Callback() {
             @Override
@@ -79,22 +105,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 try (ResponseBody responseBody = response.body()) {
-                    if (!response.isSuccessful())
-                        tb_password.setText(response.body().string());
-                        isSus[0] = false;
+                    Gson gson = new Gson();
+                    JSONObject arr = new JSONObject(responseBody.string());
+                    user = new User(gson.fromJson(arr.toString(),User.class));
+
+                    isOver[0] = true;
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
         });
-        if(isSus[0]){
-            Intent intent = new Intent(this, ProfileActivity.class);
-            startActivity(intent);
-        }
-        else{
-            Toast.makeText(getApplicationContext(),"Prijava neuspešna!", Toast.LENGTH_LONG).show();
+        while (!isOver[0]){}
+        Intent intent = new Intent(this, ProfileActivity.class);
+        intent.putExtra("username",user.getUsername());
+        intent.putExtra("password",user.getPassword());
+        intent.putExtra("email",user.getEmail());
+        startActivity(intent);
 
         }
 
 
     }
-
-}

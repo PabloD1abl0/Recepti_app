@@ -3,7 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/steam/AndroidStudioProjects/food_recepti/app/src/main/res/drawable/eye.xml" value="0.1845" />
+        <entry key="..\:/Users/steam/AndroidStudioProjects/food_recepti/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.1845" />
         <entry key="..\:/Users/steam/AndroidStudioProjects/food_recepti/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2985" />
+        <entry key="..\:/Users/steam/AndroidStudioProjects/food_recepti/app/src/main/res/drawable/leftside_rounded_edit_text.xml" value="0.1845" />
+        <entry key="..\:/Users/steam/AndroidStudioProjects/food_recepti/app/src/main/res/drawable/right_rounded_button.xml" value="0.2755" />
+        <entry key="..\:/Users/steam/AndroidStudioProjects/food_recepti/app/src/main/res/drawable/rounded_edit_text.xml" value="0.1845" />
         <entry key="..\:/Users/steam/AndroidStudioProjects/food_recepti/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/steam/AndroidStudioProjects/food_recepti/app/src/main/res/layout/activity_prijava.xml" value="0.25" />
         <entry key="..\:/Users/steam/AndroidStudioProjects/food_recepti/app/src/main/res/layout/activity_profile.xml" value="0.33" />

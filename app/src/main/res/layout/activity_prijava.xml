@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PrijavaActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/back_blue"
+    >
 
     <TextView
         android:id="@+id/textView"
@@ -20,29 +22,31 @@
     <View
         android:id="@+id/divider"
         android:layout_width="350dp"
-        android:layout_height="2dp"
+        android:layout_height="4dp"
         android:layout_gravity="center"
         android:background="?android:attr/listDivider" />
 
     <EditText
         android:id="@+id/tb_name"
         android:layout_width="350dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_margin="5dp"
-        android:background="@null"
-        android:ems="10"
+        android:background="@drawable/rounded_edit_text"
         android:hint="Ime"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:paddingStart="10dp"
+        android:textColorHint="@color/hint_gray" />
 
     <EditText
+        android:paddingStart="10dp"
+        android:textColorHint="@color/hint_gray"
         android:id="@+id/tb_username"
         android:layout_width="350dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
-        android:background="@null"
-        android:ems="10"
+        android:background="@drawable/rounded_edit_text"
         android:hint="Uporabniško ime"
         android:inputType="textPersonName" />
 
@@ -52,31 +56,47 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="5dp"
-        android:text="Lahko vsebuje črke, števila in pike"
+        android:text="Lahko vsebuje črke, števila in pike."
         android:textAlignment="center" />
 
     <EditText
+        android:paddingStart="10dp"
+        android:textColorHint="@color/hint_gray"
         android:id="@+id/tb_mail_register"
         android:layout_width="350dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:background="@null"
-        android:ems="10"
-        android:hint="Uporabniško ime"
+        android:layout_margin="5dp"
+        android:background="@drawable/rounded_edit_text"
+        android:hint="Email"
         android:inputType="textEmailAddress" />
 
-    <EditText
-        android:id="@+id/tb_password"
+    <LinearLayout
         android:layout_width="350dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
-        android:background="@null"
-        android:ems="10"
+        android:background="@drawable/rounded_edit_text"
+
+        >
+    <EditText
+        android:paddingStart="10dp"
+        android:textColorHint="@color/hint_gray"
+        android:id="@+id/tb_password"
+        android:layout_width="310dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/leftside_rounded_edit_text"
         android:hint="Geslo"
         android:inputType="textPassword"
         />
+        <ImageButton
+            android:id="@+id/btn_showPass"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/eye"
+            android:background="@drawable/right_rounded_button"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView3"
@@ -87,23 +107,37 @@
         android:text="Geslo mora biti dolgo vsaj 6 znakov, lahko kombinirate črke in številke."
         android:textAlignment="center" />
 
-    <EditText
-        android:id="@+id/tb_repeat_password"
+    <LinearLayout
         android:layout_width="350dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
         android:layout_gravity="center"
-        android:layout_margin="5dp"
-        android:background="@null"
-        android:ems="10"
-        android:hint="Potrdi geslo"
-        android:inputType="textPassword" />
+        android:layout_marginTop="5dp"
+        android:background="@drawable/rounded_edit_text">
+    <EditText
+        android:paddingStart="10dp"
+        android:textColorHint="@color/hint_gray"
+        android:id="@+id/tb_repeat_password"
+        android:layout_width="310dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/leftside_rounded_edit_text"
+        android:hint="Geslo"
+        android:inputType="textPassword"/>
+        <ImageButton
+            android:id="@+id/btn_ShowRepPass"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/eye"
+            android:background="@drawable/right_rounded_button"/>
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_register"
         android:layout_width="350dp"
         android:layout_height="70dp"
         android:layout_gravity="center"
-        android:layout_margin="5dp"
-        android:backgroundTint="@color/teal_200"
-        android:text="Button" />
+        android:layout_margin="40dp"
+        android:backgroundTint="@color/btn_blue"
+        android:text="Registriraj" app:cornerRadius="50dp"
+        />
 </LinearLayout>

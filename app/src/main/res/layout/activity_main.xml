@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:textAlignment="viewStart"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/back_blue">
 
 
     <ImageView
@@ -15,37 +16,56 @@
         android:layout_height="200dp"
         android:layout_gravity="center"
         android:layout_weight="10"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/logotip_spv" />
 
     <EditText
+        android:paddingStart="10dp"
         android:id="@+id/tb_username_main"
         android:layout_width="350dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_weight="1"
-        android:background="@null"
-        android:ems="15"
-        android:hint="Uporabniško ime"
-        android:inputType="text" />
+        android:background="@drawable/rounded_edit_text"
 
-    <EditText
-        android:id="@+id/tb_password_main"
+        android:hint="Uporabniško ime"
+        android:textColorHint="@color/hint_gray"
+        android:inputType="text"
+        android:textColor="@color/black"/>
+
+    <LinearLayout
         android:layout_width="350dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
         android:layout_gravity="center"
-        android:layout_weight="1"
-        android:background="@null"
-        android:ems="12"
-        android:hint="Geslo"
-        android:inputType="textPassword" />
+        android:layout_marginTop="5dp">
+        <EditText
+            android:paddingStart="10dp"
+            android:id="@+id/tb_password_main"
+            android:layout_width="350dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/leftside_rounded_edit_text"
+            android:hint="Geslo"
+            android:textColorHint="@color/hint_gray"
+            android:textColor="@color/black"/>
+        <ImageButton
+            android:id="@+id/btn_showPassword"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/eye"
+            android:background="@drawable/right_rounded_button"/>
+
+    </LinearLayout>
+
 
     <CheckBox
         android:id="@+id/cb_remember_me"
         android:layout_width="350dp"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_marginLeft="30dp"
         android:layout_weight="1"
-        android:text="Zapolni si me" />
+        android:text="Zapolni si me"
+        android:textColor="@color/black"/>
 
     <Button
         android:id="@+id/btn_login"
@@ -53,9 +73,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"
-        android:backgroundTint="@color/teal_200"
+        android:backgroundTint="@color/btn_blue"
         android:onClick="OpenMain"
-        android:text="Prijava" />
+        android:text="Prijava"
+        app:cornerRadius="50dp"
+        />
 
     <Button
         android:id="@+id/btn_forgot_password"
@@ -67,7 +89,8 @@
         android:text="Pozabljeno geslo"
         android:textAlignment="viewStart"
         android:textAllCaps="false"
-        android:textSize="10sp" />
+        android:textSize="10sp"
+        android:textColor="@color/black"/>
 
     <Button
         android:id="@+id/btn_register"
@@ -75,7 +98,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"
-        android:backgroundTint="@color/teal_200"
+        android:backgroundTint="@color/btn_blue"
         android:onClick="OpenRegistration"
-        android:text="Registracija" />
+        android:text="Registracija"
+        app:cornerRadius="50dp"
+        android:layout_marginBottom="50dp"/>
 </LinearLayout>
